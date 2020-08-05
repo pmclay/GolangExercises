@@ -44,3 +44,12 @@ type Dictionary interface {
 	Size() int
 	Capacity() int
 }
+
+type SearchTree interface {
+	Add(obj Item)
+	Delete(key int) error
+	Remove(key int) (Item, error)
+	Get(key int) (Item, error)
+	Contains(key int) bool
+	Size() int
+}

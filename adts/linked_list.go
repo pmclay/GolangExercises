@@ -5,13 +5,13 @@ import (
 	"fmt"
 )
 
-type node struct {
+type listnode struct {
 	data       Item
-	prev, next *node
+	prev, next *listnode
 }
 
 type LinkedList struct {
-	head, tail *node
+	head, tail *listnode
 	size       int
 }
 
@@ -36,7 +36,7 @@ func AsSlice(l *LinkedList) []Item {
 }
 
 func (l *LinkedList) createFirstNode(obj Item) {
-	l.head = new(node)
+	l.head = new(listnode)
 	l.tail = l.head
 
 	l.head.data = obj
@@ -48,7 +48,7 @@ func (l *LinkedList) Prepend(obj Item) {
 	if l.head == nil {
 		l.createFirstNode(obj)
 	} else {
-		l.head.prev = new(node)
+		l.head.prev = new(listnode)
 		l.head.prev.data = obj
 		l.head.prev.prev = nil
 		l.head.prev.next = l.head
@@ -63,7 +63,7 @@ func (l *LinkedList) Append(obj Item) {
 	if l.head == nil {
 		l.createFirstNode(obj)
 	} else {
-		l.tail.next = new(node)
+		l.tail.next = new(listnode)
 		l.tail.next.data = obj
 		l.tail.next.prev = l.tail
 		l.tail.next.next = nil
@@ -95,7 +95,7 @@ func (l *LinkedList) Insert(obj Item, idx int) error {
 		idx--
 	}
 
-	newCurrent := new(node)
+	newCurrent := new(listnode)
 	newCurrent.data = obj
 
 	current.prev.next = newCurrent

@@ -38,7 +38,7 @@ func getTestData() [24]*Element {
 // all test cases expect the Dictionary under test
 // to be a freshly instantiated object
 
-func testAddEmpty(d Dictionary, t *testing.T) {
+func testDictionaryAddEmpty(d Dictionary, t *testing.T) {
 	obj := NewElement("abc")
 
 	d.Add(obj)
@@ -59,7 +59,7 @@ func testAddEmpty(d Dictionary, t *testing.T) {
 	}
 }
 
-func testAddNonEmpty(d Dictionary, t *testing.T) {
+func testDictionaryAddNonEmpty(d Dictionary, t *testing.T) {
 	obj1 := NewElement("abc")
 	d.Add(obj1)
 
@@ -92,7 +92,7 @@ func testAddNonEmpty(d Dictionary, t *testing.T) {
 	}
 }
 
-func testAddOnExisting(d Dictionary, t *testing.T) {
+func testDictionaryAddOnExisting(d Dictionary, t *testing.T) {
 	obj1 := NewElement("abc")
 	d.Add(obj1)
 
@@ -125,7 +125,7 @@ func testAddOnExisting(d Dictionary, t *testing.T) {
 	}
 }
 
-func testDeleteEmpty(d Dictionary, t *testing.T) {
+func testDictionaryDeleteEmpty(d Dictionary, t *testing.T) {
 	obj := NewElement("abc")
 
 	err := d.Delete(obj.Hash())
@@ -140,7 +140,7 @@ func testDeleteEmpty(d Dictionary, t *testing.T) {
 	}
 }
 
-func testDeleteExistsAlone(d Dictionary, t *testing.T) {
+func testDictionaryDeleteExistsAlone(d Dictionary, t *testing.T) {
 	obj := NewElement("abc")
 	d.Add(obj)
 
@@ -166,7 +166,7 @@ func testDeleteExistsAlone(d Dictionary, t *testing.T) {
 	}
 }
 
-func testDeleteExisting(d Dictionary, t *testing.T) {
+func testDictionaryDeleteExisting(d Dictionary, t *testing.T) {
 	obj1 := NewElement("abc")
 	obj2 := NewElement("def")
 	d.Add(obj1)
@@ -200,7 +200,7 @@ func testDeleteExisting(d Dictionary, t *testing.T) {
 	}
 }
 
-func testDeleteDoesNotExist(d Dictionary, t *testing.T) {
+func testDictionaryDeleteDoesNotExist(d Dictionary, t *testing.T) {
 	obj1 := NewElement("abc")
 	obj2 := NewElement("def")
 	d.Add(obj1)
@@ -227,7 +227,7 @@ func testDeleteDoesNotExist(d Dictionary, t *testing.T) {
 	}
 }
 
-func testGetExisting(d Dictionary, t *testing.T) {
+func testDictionaryGetExisting(d Dictionary, t *testing.T) {
 	obj := NewElement("abc")
 	d.Add(obj)
 
@@ -242,7 +242,7 @@ func testGetExisting(d Dictionary, t *testing.T) {
 	}
 }
 
-func testGetDoesNotExist(d Dictionary, t *testing.T) {
+func testDictionaryGetDoesNotExist(d Dictionary, t *testing.T) {
 	obj := NewElement("abc")
 
 	item, err := d.Get(obj.Hash())
@@ -256,7 +256,7 @@ func testGetDoesNotExist(d Dictionary, t *testing.T) {
 	}
 }
 
-func testContainsExisting(d Dictionary, t *testing.T) {
+func testDictionaryContainsExisting(d Dictionary, t *testing.T) {
 	obj := NewElement("abc")
 	d.Add(obj)
 
@@ -267,7 +267,7 @@ func testContainsExisting(d Dictionary, t *testing.T) {
 	}
 }
 
-func testContainsDoesNotExist(d Dictionary, t *testing.T) {
+func testDictionaryContainsDoesNotExist(d Dictionary, t *testing.T) {
 	obj := NewElement("abc")
 
 	hasIt := d.Contains(obj.Hash())
@@ -277,7 +277,7 @@ func testContainsDoesNotExist(d Dictionary, t *testing.T) {
 	}
 }
 
-func testSize(d Dictionary, t *testing.T) {
+func testDictionarySize(d Dictionary, t *testing.T) {
 	testItems := [30]*Element{nil}
 
 	i := 0
@@ -306,7 +306,7 @@ func testSize(d Dictionary, t *testing.T) {
 	}
 }
 
-func testCapacityGrowing(d Dictionary, t *testing.T) {
+func testDictionaryCapacityGrowing(d Dictionary, t *testing.T) {
 	expectedCapacities := map[int]int{0: 8,
 		1:  8,
 		2:  8,
@@ -360,7 +360,7 @@ func testCapacityGrowing(d Dictionary, t *testing.T) {
 	}
 }
 
-func testCapacityShrinking(d Dictionary, t *testing.T) {
+func testDictionaryCapacityShrinking(d Dictionary, t *testing.T) {
 	testData := getTestData()
 	for _, value := range testData {
 		d.Add(value)
