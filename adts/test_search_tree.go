@@ -43,7 +43,7 @@ func testSearchTreeAddNonEmpty(st SearchTree, t *testing.T) {
 func testSearchTreeDeleteEmpty(st SearchTree, t *testing.T) {
 	obj := NewElement("abc")
 
-    err := st.Delete(obj.Hash())
+	err := st.Delete(obj.Hash())
 
 	if err == nil {
 		t.Errorf("Deleting non-existent item from tree did not error")
@@ -59,7 +59,7 @@ func testSearchTreeDeleteExistsAlone(st SearchTree, t *testing.T) {
 	obj := NewElement("abc")
 	st.Add(obj)
 
-    err := st.Delete(obj.Hash())
+	err := st.Delete(obj.Hash())
 
 	if err != nil {
 		t.Errorf("Deleting lone item from tree caused; %v", err)
@@ -81,7 +81,7 @@ func testSearchTreeDeleteExisting(st SearchTree, t *testing.T) {
 	st.Add(obj1)
 	st.Add(obj2)
 
-    err := st.Delete(obj1.Hash())
+	err := st.Delete(obj1.Hash())
 
 	if err != nil {
 		t.Errorf("Deleting item from tree caused; %v", err)
@@ -106,7 +106,7 @@ func testSearchTreeDeleteDoesNotExist(st SearchTree, t *testing.T) {
 	obj2 := NewElement("def")
 	st.Add(obj1)
 
-    err := st.Delete(obj2.Hash())
+	err := st.Delete(obj2.Hash())
 
 	if err == nil {
 		t.Errorf("Deleting non-existent item from tree did not error")
@@ -121,4 +121,3 @@ func testSearchTreeDeleteDoesNotExist(st SearchTree, t *testing.T) {
 		t.Errorf("Expected item was not found in tree")
 	}
 }
-

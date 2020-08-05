@@ -14,12 +14,12 @@ func (n *treenode) find(key int) *treenode {
 	}
 
 	if key == n.key {
-        return n
+		return n
 	} else if key < n.key {
-        return n.left.find(key)
-    } else {
-        return n.right.find(key)
-    }
+		return n.left.find(key)
+	} else {
+		return n.right.find(key)
+	}
 }
 
 func (n *treenode) add(obj Item) {
@@ -45,19 +45,19 @@ func (n *treenode) add(obj Item) {
 }
 
 func (n *treenode) delete(key int) *treenode {
-    if n.right != nil {
-        n.key = n.right.key
-        n.data = n.right.data
-        n.right = n.right.delete(key)
-    } else if n.left != nil {
-        n.key = n.left.key
-        n.data = n.left.data
-        n.left = n.left.delete(key)
-    } else {
-        return nil
-    }
+	if n.right != nil {
+		n.key = n.right.key
+		n.data = n.right.data
+		n.right = n.right.delete(key)
+	} else if n.left != nil {
+		n.key = n.left.key
+		n.data = n.left.data
+		n.left = n.left.delete(key)
+	} else {
+		return nil
+	}
 
-    return n
+	return n
 }
 
 type BinarySearchTree struct {
@@ -82,24 +82,24 @@ func (t *BinarySearchTree) Add(obj Item) {
 }
 
 func (t *BinarySearchTree) Delete(key int) error {
-    if t.root == nil {
-        return NewDoesNotExistError()
-    }
+	if t.root == nil {
+		return NewDoesNotExistError()
+	}
 
-    target := t.root.find(key)
+	target := t.root.find(key)
 
-    if target == t.root {
-        t.root = nil
-    }
+	if target == t.root {
+		t.root = nil
+	}
 
-    if target != nil {
-        target.delete(key)
-	    t.size -= 1
+	if target != nil {
+		target.delete(key)
+		t.size -= 1
 
-        return nil
-    } else {
-        return NewDoesNotExistError()
-    }
+		return nil
+	} else {
+		return NewDoesNotExistError()
+	}
 }
 
 func (t *BinarySearchTree) Remove(key int) (Item, error) {
@@ -112,7 +112,7 @@ func (t *BinarySearchTree) Get(key int) (Item, error) {
 }
 
 func (t *BinarySearchTree) Contains(key int) bool {
-    return t.root.find(key) != nil
+	return t.root.find(key) != nil
 }
 
 func (t *BinarySearchTree) Size() int {
