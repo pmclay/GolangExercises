@@ -115,8 +115,29 @@ func (t *BinarySearchTree) Delete(key int) error {
 }
 
 func (t *BinarySearchTree) Remove(key int) (Item, error) {
+	if t.root == nil {
+		return nil, NewDoesNotExistError()
+	}
+
+	var item Item
+
+	if t.root.key == key {
+		item = t.root.data
+		t.root = t.root.delete()
+	} else {
+		target := t.root.find(key)
+
+		if target == nil {
+			return nil, NewDoesNotExistError()
+		}
+
+		item = (*target).data
+		*target = (*target).delete()
+	}
+
 	t.size -= 1
-	return nil, nil
+
+	return item, nil
 }
 
 func (t *BinarySearchTree) Get(key int) (Item, error) {
