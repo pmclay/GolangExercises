@@ -81,10 +81,7 @@ func testSearchTreeDeleteExisting(st SearchTree, t *testing.T) {
 	st.Add(obj1)
 	st.Add(obj2)
 
-    bst := st.(*BinarySearchTree)
-    bst.Print()
 	err := st.Delete(obj1.Hash())
-    bst.Print()
 
 	if err != nil {
 		t.Errorf("Deleting item from tree caused; %v", err)
