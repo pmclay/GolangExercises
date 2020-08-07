@@ -53,3 +53,33 @@ func TestBinarySearchTreeRemoveDoesNotExist(t *testing.T) {
 	var st SearchTree = NewBinarySearchTree()
 	testSearchTreeRemoveDoesNotExist(st, t)
 }
+
+func TestBinarySearchTreeGetEmpty(t *testing.T) {
+	var st SearchTree = NewBinarySearchTree()
+	testSearchTreeGetEmpty(st, t)
+}
+
+func TestBinarySearchTreeGetExistsAlone(t *testing.T) {
+	var st SearchTree = NewBinarySearchTree()
+	testSearchTreeGetExistsAlone(st, t)
+}
+
+func TestBinarySearchTreeGetExisting(t *testing.T) {
+	var st SearchTree = NewBinarySearchTree()
+	testSearchTreeGetExisting(st, t)
+}
+
+func TestBinarySearchTreeGetDoesNotExist(t *testing.T) {
+	var st SearchTree = NewBinarySearchTree()
+	testSearchTreeGetDoesNotExist(st, t)
+}
+
+func TestBinarySearchTreeContains(t *testing.T) {
+	var st SearchTree = NewBinarySearchTree()
+	testSearchTreeContains(st, t)
+}
+
+func TestBinarySearchTreeSize(t *testing.T) {
+	var st SearchTree = NewBinarySearchTree()
+	testSearchTreeSize(st, t)
+}

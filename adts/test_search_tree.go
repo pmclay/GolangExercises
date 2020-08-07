@@ -219,3 +219,115 @@ func testSearchTreeRemoveDoesNotExist(st SearchTree, t *testing.T) {
 		t.Errorf("Expected item was not found in tree")
 	}
 }
+
+func testSearchTreeGetEmpty(st SearchTree, t *testing.T) {
+	obj := NewElement("abc")
+
+	item, err := st.Get(obj.Hash())
+
+	if err == nil {
+		t.Errorf("Getting non-existent item from tree did not error")
+	}
+
+	if item != nil {
+		t.Errorf("Getting non-existent item returned %v", item)
+	}
+
+	size := st.Size()
+	if size != 0 {
+		t.Errorf("Getting from empty tree caused; size=%d", size)
+	}
+
+	if st.Contains(obj.Hash()) {
+		t.Errorf("Unexpected item found in tree")
+	}
+}
+
+func testSearchTreeGetExistsAlone(st SearchTree, t *testing.T) {
+	obj := NewElement("abc")
+	st.Add(obj)
+
+	item, err := st.Get(obj.Hash())
+
+	if err != nil {
+		t.Errorf("Getting lone item from tree caused; %v", err)
+	}
+
+	if item.ID() != obj.ID() {
+		t.Errorf("Getting item returned unexpected item  %v", item)
+	}
+
+	size := st.Size()
+	if size != 1 {
+		t.Errorf("Getting lone item from tree caused; size=%d", size)
+	}
+
+	if !st.Contains(obj.Hash()) {
+		t.Errorf("Retrieved item cannot be found in tree")
+	}
+}
+
+func testSearchTreeGetExisting(st SearchTree, t *testing.T) {
+	obj1 := NewElement("abc")
+	obj2 := NewElement("def")
+	st.Add(obj1)
+	st.Add(obj2)
+
+	item, err := st.Get(obj1.Hash())
+
+	if err != nil {
+		t.Errorf("Getting item from tree caused; %v", err)
+	}
+
+	if item.ID() != obj1.ID() {
+		t.Errorf("Getting item returned unexpected item  %v", item)
+	}
+
+	size := st.Size()
+	if size != 2 {
+		t.Errorf("Getting item from tree caused; size=%d", size)
+	}
+
+	if !st.Contains(obj1.Hash()) {
+		t.Errorf("Retrieved item cannot be found in tree")
+	}
+
+	if !st.Contains(obj2.Hash()) {
+		t.Errorf("Expected item was not found in tree")
+	}
+}
+
+func testSearchTreeGetDoesNotExist(st SearchTree, t *testing.T) {
+	obj1 := NewElement("abc")
+	obj2 := NewElement("def")
+	st.Add(obj1)
+
+	item, err := st.Get(obj2.Hash())
+
+	if err == nil {
+		t.Errorf("Getting non-existent item from tree did not error")
+	}
+
+	if item != nil {
+		t.Errorf("Getting non-existent item returned %v", item)
+	}
+
+	size := st.Size()
+	if size != 1 {
+		t.Errorf("Getting from empty tree caused; size=%d", size)
+	}
+
+	if !st.Contains(obj1.Hash()) {
+		t.Errorf("Expected item was not found in tree")
+	}
+
+	if st.Contains(obj2.Hash()) {
+		t.Errorf("Unexpected item found in tree")
+	}
+}
+
+func testSearchTreeContains(st SearchTree, t *testing.T) {
+}
+
+func testSearchTreeSize(st SearchTree, t *testing.T) {
+}

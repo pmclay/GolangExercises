@@ -141,7 +141,25 @@ func (t *BinarySearchTree) Remove(key int) (Item, error) {
 }
 
 func (t *BinarySearchTree) Get(key int) (Item, error) {
-	return nil, nil
+	if t.root == nil {
+		return nil, NewDoesNotExistError()
+	}
+
+	var item Item
+
+	if t.root.key == key {
+		item = t.root.data
+	} else {
+		target := t.root.find(key)
+
+		if target == nil {
+			return nil, NewDoesNotExistError()
+		}
+
+		item = (*target).data
+	}
+
+	return item, nil
 }
 
 func (t *BinarySearchTree) Contains(key int) bool {
