@@ -70,7 +70,7 @@ func testLL() {
 
 func testHT() {
 	ht := NewHashTable(8)
-	data := getTestData()
+	data := getTestDictionaryData()
 
 	i := 0
 	for ; ; i++ {

@@ -1,8 +1,20 @@
 package main
 
 import (
+	"strconv"
 	"testing"
 )
+
+func getTestSearchTreeData() [20]*Element {
+
+	testData := [20]*Element{}
+
+	for i := 0; i < 20; i++ {
+		testData[i] = NewElement(strconv.Itoa(i))
+	}
+
+	return testData
+}
 
 func testSearchTreeAddEmpty(st SearchTree, t *testing.T) {
 	obj := NewElement("abc")
@@ -327,7 +339,61 @@ func testSearchTreeGetDoesNotExist(st SearchTree, t *testing.T) {
 }
 
 func testSearchTreeContains(st SearchTree, t *testing.T) {
+	items := getTestSearchTreeData()
+
+	for i := 0; i < len(items); i++ {
+		st.Add(items[i])
+
+		for j := 0; j <= i; j++ {
+			if !st.Contains(items[j].Hash()) {
+				t.Errorf("Expected item was not found in tree")
+			}
+		}
+
+		for j := i + 1; j < len(items); j++ {
+			if st.Contains(items[j].Hash()) {
+				t.Errorf("Tree contains unexpected item")
+			}
+		}
+	}
+
+	for i := 0; i < len(items); i++ {
+		st.Delete(items[i].Hash())
+
+		for j := 0; j <= i; j++ {
+			if st.Contains(items[j].Hash()) {
+				t.Errorf("Tree contains unexpected item")
+			}
+		}
+
+		for j := i + 1; j < len(items); j++ {
+			if !st.Contains(items[j].Hash()) {
+				t.Errorf("Expected item was not found in tree")
+			}
+		}
+	}
 }
 
 func testSearchTreeSize(st SearchTree, t *testing.T) {
+	items := getTestSearchTreeData()
+
+	for i := 0; i < len(items); i++ {
+		if st.Size() != i {
+			t.Errorf("Tree with %d items had size %d", i, st.Size())
+		}
+
+		st.Add(items[i])
+	}
+
+	for i := len(items); i > 0; i-- {
+		if st.Size() != i {
+			t.Errorf("Tree with %d items had size %d", i, st.Size())
+		}
+
+		st.Delete(items[i-1].Hash())
+	}
+
+	if st.Size() != 0 {
+		t.Errorf("Empty tree had size %d", st.Size())
+	}
 }

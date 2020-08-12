@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func getTestData() [24]*Element {
+func getTestDictionaryData() [24]*Element {
 
 	testData := [24]*Element{NewElement("abcd"),
 		NewElement("abdc"),
@@ -333,7 +333,7 @@ func testDictionaryCapacityGrowing(d Dictionary, t *testing.T) {
 		23: 32,
 		24: 64}
 
-	testData := getTestData()
+	testData := getTestDictionaryData()
 	for i, value := range testData {
 		expected := expectedCapacities[i]
 		actual := d.Capacity()
@@ -361,7 +361,7 @@ func testDictionaryCapacityGrowing(d Dictionary, t *testing.T) {
 }
 
 func testDictionaryCapacityShrinking(d Dictionary, t *testing.T) {
-	testData := getTestData()
+	testData := getTestDictionaryData()
 	for _, value := range testData {
 		d.Add(value)
 	}
