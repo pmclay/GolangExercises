@@ -4,20 +4,6 @@ import (
 	"fmt"
 )
 
-func (h *HashTable) PrintTable() {
-	for i, item := range h.table {
-		fmt.Printf("%d: ", i)
-		current := item
-
-		for current != nil {
-			fmt.Printf("{key=%d value=%s} -> ", current.key, current.value.String())
-			current = current.next
-		}
-
-		fmt.Printf("nil\n")
-	}
-}
-
 func testDA() {
 	var x List
 	x = NewDynamicArray(2)
@@ -92,9 +78,21 @@ func testHT() {
 	fmt.Println()
 }
 
+func testBST() {
+	bst := NewBinarySearchTree()
+	data := getTestDictionaryData()
+
+	for i := 0; i < 7; i++ {
+		bst.Add(data[i])
+	}
+	bst.Print()
+	fmt.Printf("size=%d", bst.Size())
+}
+
 func main() {
-	testHT()
+	testBST()
 	/*fmt.Println("Playing with DynamicArray")
+	testHT()
 	testDA()
 	fmt.Println()
 	fmt.Println("Playing with LinkedList")

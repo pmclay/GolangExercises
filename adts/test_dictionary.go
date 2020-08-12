@@ -7,30 +7,31 @@ import (
 
 func getTestDictionaryData() [24]*Element {
 
-	testData := [24]*Element{NewElement("abcd"),
+	testData := [24]*Element{
+		NewElement("bdac"),
 		NewElement("abdc"),
-		NewElement("acbd"),
-		NewElement("acdb"),
+		NewElement("cbda"),
 		NewElement("adbc"),
+		NewElement("dcab"),
+		NewElement("acdb"),
+		NewElement("dbca"),
 		NewElement("adcb"),
 		NewElement("bacd"),
-		NewElement("badc"),
-		NewElement("bcad"),
+		NewElement("acbd"),
 		NewElement("bcda"),
-		NewElement("bdac"),
 		NewElement("bdca"),
-		NewElement("cabd"),
 		NewElement("cadb"),
-		NewElement("cbad"),
-		NewElement("cbda"),
+		NewElement("dbac"),
 		NewElement("cdab"),
+		NewElement("badc"),
+		NewElement("cabd"),
+		NewElement("dcba"),
 		NewElement("cdba"),
 		NewElement("dabc"),
+		NewElement("abcd"),
 		NewElement("dacb"),
-		NewElement("dbac"),
-		NewElement("dbca"),
-		NewElement("dcab"),
-		NewElement("dcba")}
+		NewElement("cbad"),
+		NewElement("bcad")}
 
 	return testData
 }
