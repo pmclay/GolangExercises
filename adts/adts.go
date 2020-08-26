@@ -53,3 +53,9 @@ type SearchTree interface {
 	Contains(key int) bool
 	Size() int
 }
+
+type PrefixTree interface {
+	Add(obj Item)
+	Contains(key string) bool
+	Size() int
+}
