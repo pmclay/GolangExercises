@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strconv"
 	"testing"
 )
 
@@ -200,6 +201,8 @@ func testPrefixTreeSize(pt PrefixTree, t *testing.T) {
 		if pt.Size() != i {
 			t.Errorf("A prefix tree with %d items had size=%d", i, pt.Size())
 		}
+
+		pt.Add(NewElement(strconv.Itoa(i)))
 	}
 
 	if pt.Size() != i {
