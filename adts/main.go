@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 )
 
 func testDA() {
@@ -85,8 +86,16 @@ func testBST() {
 	for i := 0; i < 7; i++ {
 		bst.Add(data[i])
 	}
-	bst.Print()
-	fmt.Printf("size=%d", bst.Size())
+
+	buffer := []byte(bst.String())
+
+	err := ioutil.WriteFile("bst.dot", buffer, 0600)
+	if err != nil {
+		fmt.Printf("failed to write BST to graphviz\n")
+		return
+	} else {
+		fmt.Printf("BST to graphviz\n")
+	}
 }
 
 func main() {

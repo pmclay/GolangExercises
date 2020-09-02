@@ -2,65 +2,54 @@ package main
 
 import (
 	"fmt"
-	"math"
+	"strings"
 )
 
-func getDepth(node *treenode, depth int) int {
-	if node == nil {
-		return depth
-	}
+func bstPostOrderLabel(node *treenode, id *int, out *strings.Builder) string {
+	var leftID, rightID string
 
-	leftDepth := getDepth(node.left, depth+1)
-	rightDepth := getDepth(node.right, depth+1)
-
-	if leftDepth < rightDepth {
-		return rightDepth
+	if node.left != nil {
+		leftID = bstPostOrderLabel(node.left, id, out)
 	} else {
-		return leftDepth
+		leftID = fmt.Sprintf("n%d", *id)
+		(*id)++
+		out.WriteString(fmt.Sprintf("%s [label=\"nil\"]\n", leftID))
 	}
+
+	if node.right != nil {
+		rightID = bstPostOrderLabel(node.right, id, out)
+	} else {
+		rightID = fmt.Sprintf("n%d", *id)
+		(*id)++
+		out.WriteString(fmt.Sprintf("%s [label=\"nil\"]\n", rightID))
+	}
+
+	myID := fmt.Sprintf("n%d", *id)
+	(*id)++
+
+	out.WriteString(fmt.Sprintf("%s [label=\"%s\"]\n",
+		myID,
+		node.data.String()))
+
+	out.WriteString(fmt.Sprintf("%s -> %s\n", myID, leftID))
+	out.WriteString(fmt.Sprintf("%s -> %s\n", myID, rightID))
+
+	return myID
 }
 
-func (t *BinarySearchTree) Print() {
-	depth := getDepth(t.root, 0)
-	fmt.Printf("depth=%d\n", depth)
+func (t *BinarySearchTree) String() string {
+	buffer := strings.Builder{}
+	buffer.WriteString("digraph BST {")
 
-	dodo := &treenode{}
-	q := []*treenode{t.root, dodo}
-
-	level := 0
-	for len(q) != 0 {
-		current := q[0]
-		q = q[1:]
-
-		if current == dodo {
-			fmt.Printf("\n")
-			for i := 0; i < int(math.Pow(2.0, float64(depth-level)))-1; i++ {
-				fmt.Printf(" ")
-			}
-
-			if len(q) != 0 {
-				q = append(q, dodo)
-				level++
-			}
-		} else {
-			offset := int(math.Floor((math.Pow(2.0, float64(depth+1)) - 1) / math.Pow(2.0, float64(level))))
-			for i := 0; i < offset; i++ {
-				fmt.Printf(" ")
-			}
-
-			if current != nil {
-				fmt.Printf(current.data.String())
-				q = append(q, current.left)
-				q = append(q, current.right)
-			} else {
-				fmt.Printf("null")
-			}
-
-			for i := 0; i < (depth-level)+1; i++ {
-				fmt.Printf(" ")
-			}
-		}
+	if t.root == nil {
+		buffer.WriteString("nil}")
+	} else {
+		id := 0
+		bstPostOrderLabel(t.root, &id, &buffer)
+		buffer.WriteString("}")
 	}
+
+	return buffer.String()
 }
 
 func (h *HashTable) PrintTable() {
