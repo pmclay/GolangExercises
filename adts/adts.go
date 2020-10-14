@@ -59,3 +59,14 @@ type PrefixTree interface {
 	Contains(key string) bool
 	Size() int
 }
+
+type Heap interface {
+	Add(obj Item)
+	Delete(key string) error
+	Remove(key string) (Item, error)
+	Get(key string) (Item, error)
+	Pop() (Item, error)
+	Peek() (Item, error)
+	Contains(key string) bool
+	Size() int
+}
