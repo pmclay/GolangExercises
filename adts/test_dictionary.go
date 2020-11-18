@@ -1,3 +1,7 @@
+/*
+ *  © 2020 Michael Page. All rights reserved.
+ */
+
 package main
 
 import (
